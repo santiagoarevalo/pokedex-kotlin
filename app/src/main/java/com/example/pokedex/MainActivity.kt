@@ -26,8 +26,10 @@ class MainActivity : AppCompatActivity() {
         binding.pokelista.setHasFixedSize(true)
 
         binding.searchBtn.setOnClickListener {
+            var intent = Intent(this@MainActivity, PokemonDetailsActivity::class.java)
+            intent.putExtra("goal", binding.pokemonSearchET.text.toString())
             startActivity(
-                Intent(this@MainActivity, PokemonDetailsActivity::class.java)
+                intent
             )
         }
 

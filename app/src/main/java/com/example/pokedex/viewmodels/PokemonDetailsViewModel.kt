@@ -14,7 +14,6 @@ class PokemonDetailsViewModel : ViewModel() {
     //Variables to be displayed in the view
     val pokemon: MutableLiveData<Pokemon> = MutableLiveData()
 
-
     //Function to be called from the view
     fun getDetails(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
