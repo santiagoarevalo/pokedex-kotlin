@@ -3,10 +3,14 @@ package com.example.pokedex
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pokedex.adapter.PokemonAdapter
 import com.example.pokedex.databinding.ActivityMainBinding
+import com.example.pokedex.model.Pokemon
+import com.example.pokedex.viewmodels.MainViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -16,6 +20,10 @@ class MainActivity : AppCompatActivity() {
     val adapter by lazy {
         PokemonAdapter()
     }
+
+    //Hilt
+    val viewModel: MainViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +39,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(
                 intent
             )
+        }
+
+        viewModel.getPokemons()
+        viewModel.pokemonsLiveData.observe(this) {
+            adapter.addAllPokemons(it as ArrayList<Pokemon>)
         }
 
         binding.logoutBtn.setOnClickListener {

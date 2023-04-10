@@ -14,12 +14,6 @@ class PokemonAdapter : Adapter<PokemonVH>() {
 
     val arr = ArrayList<Pokemon>()
 
-    init {
-        arr.add(Pokemon("alfa"))
-        arr.add(Pokemon("beta"))
-        arr.add(Pokemon("gamma"))
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PokemonVH {
         return PokemonVH(
             LayoutInflater.from(parent.context).inflate(R.layout.pokemon_view, parent, false)
@@ -37,6 +31,11 @@ class PokemonAdapter : Adapter<PokemonVH>() {
                 Intent(holder.itemView.context, PokemonDetailsActivity::class.java)
             )
         }
+    }
+
+    fun addAllPokemons(pokemons: ArrayList<Pokemon>) {
+        arr.addAll(pokemons)
+        notifyDataSetChanged()
     }
 
 

@@ -2,8 +2,6 @@ package com.example.pokedex
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.example.pokedex.databinding.ActivityMainBinding
@@ -31,10 +29,15 @@ class PokemonDetailsActivity : AppCompatActivity() {
                 binding.attackTV.text = pokemon.stats[1].base_stat.toString()
                 binding.lifeTV.text = pokemon.stats[0].base_stat.toString()
                 binding.speedTV.text = pokemon.stats[5].base_stat.toString()
-                Glide.with(this).load(pokemon.sprites.front_default).into(binding.pokeimg)
+                Glide.with(this)
+                    .load(pokemon.sprites.front_default)
+                    .centerCrop()
+                    .into(binding.pokeimg)
             }
-        } ?: run {
-            Toast.makeText(this, "No se ha encontrado el pokemon", Toast.LENGTH_SHORT).show()
+        }
+
+        binding.button.setOnClickListener {
+            viewModel.catchPokemon()
         }
     }
 }
